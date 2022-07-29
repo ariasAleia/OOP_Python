@@ -37,4 +37,48 @@ class Item:
         pass
 ```
 
-12:00
+## Constructor
+
+Well, basically the function that is called when we make an instance of a class.
+
+We write it with *def __*. Those methods with double underscore are usually codes magic methods.
+
+This in a constructor. We can also assign the attributes of the class.
+
+```python
+class Item:
+    
+    def __init__(self, name, price, quantity = 0):
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+        
+    
+item1 = Item("Phone", 50, 6)
+print(f"Name: {item1.name} Price: {item1.price} Quantity: {item1.quantity}")
+item2 = Item("Laptops", 45)
+print(f"Name: {item2.name} Price: {item2.price} Quantity: {item2.quantity}")
+```
+
+## Assign attributes to specific instances individually
+
+Important and interesting to know. We can keep adding attributes directly to the instant that we created:
+```python
+class Item:
+    
+    def __init__(self, name, price, quantity = 0):
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+        
+    
+item1 = Item("Phone", 50, 6)
+print(f"Name: {item1.name} Price: {item1.price} Quantity: {item1.quantity}")
+item2 = Item("Laptops", 45)
+print(f"Name: {item2.name} Price: {item2.price} Quantity: {item2.quantity}")
+#New attribute
+item2.has_big_screen = False
+print(item2.has_big_screen)
+```
+
+In this case, the attribute *has_big_screen* was created after and it will be valid only for the object *item2* but the point here is that it was valid to add it. Yes, in the constructor we specify attributes that the instances of the class must have but it doesn't mean that we cannot add more attributes to specific instances that we created. 
