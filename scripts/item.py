@@ -18,3 +18,4 @@ item2.has_big_screen = False
 print(item2.has_big_screen)
 
 print(item1.calculate_total_price())
+print(item2.calculate_total_price())
