@@ -37,6 +37,9 @@ class Item:
         pass
 ```
 
+
+Hey! Remember it!!! All methods in a class must have as parameter the object itsefl! We do it by writing *self* in the method.
+
 ## Constructor
 
 Well, basically the function that is called when we make an instance of a class.
@@ -82,3 +85,9 @@ print(item2.has_big_screen)
 ```
 
 In this case, the attribute *has_big_screen* was created after and it will be valid only for the object *item2* but the point here is that it was valid to add it. Yes, in the constructor we specify attributes that the instances of the class must have but it doesn't mean that we cannot add more attributes to specific instances that we created. 
+
+## Specifying the type of a variable in a function
+
+Yep! I really like learning. I didn't know how to do this before and now I will learn it! :D I really feel better when I can make progress and understand! Understand. Wow! Definitely one of my favorite verbs.
+
+25:44
