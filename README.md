@@ -242,6 +242,9 @@ Item 1, Before discount: 100
 Item 1, After discount: 80.0
 ```
 
+
+
+So conclusion! If we want to be able to change attributes individually for each instance we may want to use *self* in the methods when we call a class attribute. On the other hand, if we want to have the same class attribute for allllll the instances then it's better to call the attribute directly from the class level usign the name of the class, in this case: *Item.pay_rate*
 ## Magic attributes
 
 Those things are really nice. Basically, we can do magic things with them. (There are also magic functions! Everything that comes with __ double underscore is kind of magic! Like the function init. Jap. It also belongs to the magic group as a magic function)
@@ -258,3 +261,5 @@ print(f"Instance attributes {item1.__dict__}")
 ```
 
 That is just the Hammer! (ein bisschen Deutsch hier, oder?) because in that way we can kind of debug or we can even check if there are more attributes in an specific instance since we already know that we can assign attributes to specific instances individually. :D
+
+
