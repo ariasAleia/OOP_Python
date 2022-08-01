@@ -1,6 +1,7 @@
 class Item:
     
     pay_rate = 0.8 # The pay rate after 20% discount
+    all = []
     
     def __init__(self, name: str, price: float, quantity: int = 0):
         # Validate received arguments
@@ -12,12 +13,17 @@ class Item:
         self.price = price
         self.quantity = quantity
         
+        # Actions to execute 
+        Item.all.append(self)
+        
     def calculate_total_price(self)->float:
         return self.price * self.quantity
     
     def apply_discount(self):
         self.price *= self.pay_rate
         
+    def __repr__(self):
+        return f"Item('{self.name}', {self.price}, {self.quantity})"
     
     
     
@@ -48,3 +54,10 @@ print(f"Item 2, after new discount {item2.price}")
 print(f"Item 1, Before discount: {item1.price}")
 item1.apply_discount()
 print(f"Item 1, After discount: {item1.price}")
+
+item3 = Item("Cable", 10, 5)
+item4 = Item("Mouse", 50, 5)
+item5 = Item("Keyboard", 75, 5)
+
+print(Item.all)
+print(item3)

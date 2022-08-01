@@ -264,3 +264,61 @@ Yap, I know it may be not part of the topics of OOP but this was toooo good that
 
 Now yes, let's go on with OOP.
 
+## Creating a list to save all instances of a class
+
+Well, now let's say that we will continue to create many instances of a class. It would be really nice to have access to all the instances that we created. We can do this by having a class attribute of type list. In this list we can append the instances just when we create them. This can be done in the init method for example.
+
+Class attribute and appending action when an instance is created:
+
+```python
+class Item:
+    
+    pay_rate = 0.8 # The pay rate after 20% discount
+    all = []
+    
+    def __init__(self, name: str, price: float, quantity: int = 0):
+        # Validate received arguments
+        assert price >= 0, f"Price {price} must be equal or greater than zero"
+        assert quantity >= 0, f"Quantity {quantity} must be equal or greater than zero"
+
+        # Assign attributes to self object
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+        
+        # Actions to execute 
+        Item.all.append(self)
+    ...
+```
+
+Now if want to know which instances we have, we can directly know it accessing to the attribute *all*. That sounds good, however if we directly print the list or an element with the print function, doing this:
+
+```python
+print(Item.all)
+print(item3)
+```
+
+We will get an output that doesn't have the info but the location in memory of the variable (object), like this:
+
+```shell
+[<__main__.Item object at 0x000002C10BF3AFD0>, <__main__.Item object at 0x000002C10BF3AF70>, <__main__.Item object at 0x000002C10BF3AEB0>, <__main__.Item object at 0x000002C10BF3ADC0>, <__main__.Item object at 0x000002C10BF3AD60>]
+<__main__.Item object at 0x000002C10BF3AEB0>
+```
+
+And yes... we understand it but! We can fix it by doing the following thing: Magic! Yes. Here comes a magic method called __repr __. In this we define the output that we want to get when we directly print an instance of a class.
+
+In our case:
+
+```python
+def __repr__(self):
+    return f"Item('{self.name}', {self.price}, {self.quantity})"
+```
+
+And if we print again then we will get an output exactly with the format that we specified:
+
+```shell
+[Item('Phone', 80.0, 6), Item('Laptops', 700.0, 0), Item('Cable', 10, 5), Item('Mouse', 50, 5), Item('Keyboard', 75, 5)]
+Item('Cable', 10, 5)
+```
+
+Yes. Magic is magic!
