@@ -257,3 +257,10 @@ print(f"Instance attributes {item1.__dict__}")
 ```
 
 That is just the Hammer! (ein bisschen Deutsch hier, oder?) because in that way we can kind of debug or we can even check if there are more attributes in an specific instance since we already know that we can assign attributes to specific instances individually. :D
+
+## Extension to check spell mistakes!
+
+Yap, I know it may be not part of the topics of OOP but this was toooo good that I had to mention it. We just installed an extension called Code Spell Checker. The problem was that it was reporting the spell mistakes as problems in the code. We just fixed that modifying the settings.json file and it was greaaat. First time I did it understanding. For more info visit this [link](https://stackoverflow.com/questions/50309834/vs-code-enable-inline-spell-checker-but-disable-spell-check-in-the-problems).
+
+Now yes, let's go on with OOP.
+
