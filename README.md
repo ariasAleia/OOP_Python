@@ -38,7 +38,7 @@ class Item:
 ```
 
 
-Hey! Remember it!!! All methods in a class must have as parameter the object itsefl! We do it by writing *self* in the method.
+Hey! Remember it!!! All methods in a class must have as parameter the object itself! We do it by writing *self* in the method.
 
 ## Constructor
 
@@ -90,7 +90,7 @@ In this case, the attribute *has_big_screen* was created after and it will be va
 
 Yep! I really like learning. I didn't know how to do this before and now I will learn it! :D I really feel better when I can make progress and understand! Understand. Wow! Definitely one of my favorite verbs.
 
-So! **Really important:** In Python, we don't have variables, we have objects. And eacj object know its type. We will come back to this later. In functions, we can specify the type of the arguments we are passing. We can do it by using : followed by the type after the name of the parameter. For example:
+So! **Really important:** In Python, we don't have variables, we have objects. And each object know its type. We will come back to this later. In functions, we can specify the type of the arguments we are passing. We can do it by using : followed by the type after the name of the parameter. For example:
 
 ```python
 def __init__(self, name: str, price: float, quantity: int = 0):
@@ -128,7 +128,7 @@ In this case, we return a float.
 
 ## Validate received arguments in a function with *assert*
 
-So! Ok, we can indicate what kind of type we expect to receive in a function but we already know that python won't complain but that if we want it to do then we can use sth like isinstance but that we shouldn't really do it because we are all adults but... We can do some things. Oh yeah. We can check for example if an argument makes sense. For example in the function when we recieve price and quantity of a prodcut we want these values to be greater than 0. And! There's a really short way to do it: We can use assert. We basically check if a condiction is met and if not, there will be an assertion error. We can also write a message that will appear in case the condition is not met.
+So! Ok, we can indicate what kind of type we expect to receive in a function but we already know that python won't complain but that if we want it to do then we can use sth like isinstance but that we shouldn't really do it because we are all adults but... We can do some things. Oh yeah. We can check for example if an argument makes sense. For example in the function when we receive price and quantity of a product we want these values to be greater than 0. And! There's a really short way to do it: We can use assert. We basically check if a condition is met and if not, there will be an assertion error. We can also write a message that will appear in case the condition is not met.
 
 
 ```python
@@ -167,7 +167,7 @@ print(item1.pay_rate)
 print(item2.pay_rate)
 ```
 
-Why? Well, it's a class attribute and therefore we can access it directly from the class just typing the name of it, in this case *Item*. And we also can access it from the instance. Why? Well, the attributes in an instance are first searched in the instance attributes (those that are found in the init function). If the instance doen's find those attributes in the instance level, then it will search that in the class level as a class attribute. 
+Why? Well, it's a class attribute and therefore we can access it directly from the class just typing the name of it, in this case *Item*. And we also can access it from the instance. Why? Well, the attributes in an instance are first searched in the instance attributes (those that are found in the init function). If the instance doesn't find those attributes in the instance level, then it will search that in the class level as a class attribute. 
 
 We can now use the class attribute in a function that we define in our class. Remember, we can do it from the class level (as in the example below using Item.pay_rate) or we can do it from the instance level (that would be using self.pay_rate)
 
@@ -219,22 +219,20 @@ class Item:
     
     def apply_discount(self):
         self.price *= self.pay_rate
-```
 
-
-
-```python
 print(f"Item 2, before discount {item2.price}")
 #Modifying in instance level the attribute for the instance item2 and calling the function:
 item2.pay_rate = 0.7
 item2.apply_discount()
 print(f"Item 2, after new discount {item2.price}")
 
-#Seeing that item1 keeps accesing the attribute from class level and therefore the pay rate is still 0.8
+#Seeing that item1 keeps accessing the attribute from class level and therefore the pay rate is still 0.8
 print(f"Item 1, Before discount: {item1.price}")
 item1.apply_discount()
 print(f"Item 1, After discount: {item1.price}")
 ```
+
+Output: 
 ```shell
 Item 2, before discount 1000
 Item 2, after new discount 700.0
@@ -242,9 +240,7 @@ Item 1, Before discount: 100
 Item 1, After discount: 80.0
 ```
 
-
-
-So conclusion! If we want to be able to change attributes individually for each instance we may want to use *self* in the methods when we call a class attribute. On the other hand, if we want to have the same class attribute for allllll the instances then it's better to call the attribute directly from the class level usign the name of the class, in this case: *Item.pay_rate*
+So conclusion! If we want to be able to change attributes individually for each instance we may want to use *self* in the methods when we call a class attribute. On the other hand, if we want to have the same class attribute for allllll the instances then it's better to call the attribute directly from the class level using the name of the class, in this case: *Item.pay_rate*
 ## Magic attributes
 
 Those things are really nice. Basically, we can do magic things with them. (There are also magic functions! Everything that comes with __ double underscore is kind of magic! Like the function init. Jap. It also belongs to the magic group as a magic function)
@@ -261,5 +257,3 @@ print(f"Instance attributes {item1.__dict__}")
 ```
 
 That is just the Hammer! (ein bisschen Deutsch hier, oder?) because in that way we can kind of debug or we can even check if there are more attributes in an specific instance since we already know that we can assign attributes to specific instances individually. :D
-
-
