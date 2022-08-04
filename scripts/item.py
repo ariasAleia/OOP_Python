@@ -25,39 +25,8 @@ class Item:
     def __repr__(self):
         return f"Item('{self.name}', {self.price}, {self.quantity})"
     
+    @classmethod
+    def instantiate_from_csv(cls):
+        pass
     
     
-item1 = Item("Phone", 100, 6)
-print(f"Name: {item1.name} Price: {item1.price} Quantity: {item1.quantity}")
-item2 = Item("Laptops", 1000)
-print(f"Name: {item2.name} Price: {item2.price} Quantity: {item2.quantity}")
-#New attribute
-item2.has_big_screen = False
-print(item2.has_big_screen)
-
-print(item1.calculate_total_price())
-print(item2.calculate_total_price())
-
-print(Item.pay_rate)
-print(item1.pay_rate)
-print(item2.pay_rate)
-
-print(f"Class attributes {Item.__dict__}")
-print(f"Instance attributes {item1.__dict__}")
-
-
-print(f"Item 2, before discount {item2.price}")
-item2.pay_rate = 0.7
-item2.apply_discount()
-print(f"Item 2, after new discount {item2.price}")
-
-print(f"Item 1, Before discount: {item1.price}")
-item1.apply_discount()
-print(f"Item 1, After discount: {item1.price}")
-
-item3 = Item("Cable", 10, 5)
-item4 = Item("Mouse", 50, 5)
-item5 = Item("Keyboard", 75, 5)
-
-print(Item.all)
-print(item3)
