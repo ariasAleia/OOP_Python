@@ -29,7 +29,12 @@ Btw, the word *pass* is used when we haven't defined what is inside a function, 
 
 ## Methods 
 
-Those are basically functions that are inside a class. We must always pass as argument the object itself. That is done by writing *self* in the function parameters when we define the function. 
+Those are basically functions that are inside a class. There are two different types of methods. Class methods and instance methods.
+
+
+### Instance methods
+
+Instance methods are those who are called directly from an instance. For these methods we must always pass as argument the object (whn we say object it means exactly the same as instance) itself. That is done by writing *self* in the function parameters when we define the function. 
 
 ```python
 class Item:
@@ -37,8 +42,27 @@ class Item:
         pass
 ```
 
+Hey! Remember it!!! All instance methods in a class must have as parameter the object itself! We do it by writing *self* in the method.
 
-Hey! Remember it!!! All methods in a class must have as parameter the object itself! We do it by writing *self* in the method.
+### Class methods
+
+Those methods are called directly from the class. That means that we don't any instance to call these methods. And therefore that means that **for class methods we don't need to pass *self* as an argument**, mainly because we only do it when we need an instance of the class but here the method, since it's a class method, doesn't need any instance.
+
+To differentiate class methods from instance methods we have to add a decorator in the declaration of the function. 
+
+Decorators are a quick way to change the behavior of the functions. They are words that begin with @ and are added before the definition of the function.
+
+```python
+@classmethod
+    def instantiate_from_csv(cls):
+        pass
+```
+
+But wait... Do you see the same that I am seeing? Yep, we still have an argument in that method. It is indeed not *self* but there is still a word: *cls*. Well, basically that occurs because we need anyway to call the function from the class and therefore the first argument of the class method is class, in a short way *cls*. That means that: (Here comes sth important!)
+
+**No matter if it's a class or instance method. Methods in Python must always have an argument. It is *self* for instance methods or it is *cls* for class methods. But the important point is that we always receive at least an argument**
+
+Btw, I think that the words *self* and *cls* must not be exactly those ones but we already know that convention is sth that helps readability and yep, life is easier and better when people do it.
 
 ## Constructor
 
@@ -305,7 +329,11 @@ We will get an output that doesn't have the info but the location in memory of t
 <__main__.Item object at 0x000002C10BF3AEB0>
 ```
 
-And yes... we understand it but! We can fix it by doing the following thing: Magic! Yes. Here comes a magic method called __repr __. In this we define the output that we want to get when we directly print an instance of a class.
+And yes... we understand it but! We can fix it by doing the following thing: Magic! Read the next section for more info!
+
+## Magic method repr
+
+Yes. Here comes a magic method called __repr __. In this we define the output that we want to get when we directly print an instance of a class.
 
 In our case:
 
@@ -322,3 +350,10 @@ Item('Cable', 10, 5)
 ```
 
 Yes. Magic is magic!
+
+
+## CSV: Comma separated values
+
+We can create these type of files in vscode and with an extension called Excel Viewer we can display the content in a table. 
+
+57
