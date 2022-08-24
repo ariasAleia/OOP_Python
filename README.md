@@ -60,7 +60,7 @@ Decorators are a quick way to change the behavior of the functions. They are wor
 
 But wait... Do you see the same that I am seeing? Yep, we still have an argument in that method. It is indeed not *self* but there is still a word: *cls*. Well, basically that occurs because we need anyway to call the function from the class and therefore the first argument of the class method is class, in a short way *cls*. That means that: (Here comes sth important!)
 
-**No matter if it's a class or instance method. Methods in Python must always have an argument. It is *self* for instance methods or it is *cls* for class methods. But the important point is that we always receive at least an argument**
+**No matter if it's a class or instance method. Methods of a class or of an instance in Python must always have an argument. It is *self* for instance methods or it is *cls* for class methods. But the important point is that we always receive at least an argument. But take care: That's different if we are dealing with static methods**
 
 Btw, I think that the words *self* and *cls* must not be exactly those ones but we already know that convention is sth that helps readability and yep, life is easier and better when people do it.
 
@@ -86,6 +86,28 @@ print(f"Name: {item1.name} Price: {item1.price} Quantity: {item1.quantity}")
 item2 = Item("Laptops", 45)
 print(f"Name: {item2.name} Price: {item2.price} Quantity: {item2.quantity}")
 ```
+
+## Static methods
+
+This kind of methods do not need specific parameters. Neither cls or self. They are related to the class somehow and have a relevance to it but they cannot modify any attribute of the class.
+
+Here an example with sth interesting about the built_in function is_integer:
+
+```python
+    @staticmethod
+    def is_integer(num):
+        if isinstance(num, int):
+            return True
+        elif isinstance(num, float):
+            return num.is_integer()
+        return False
+```
+That one is a static method. We can see it because of the decorator @staticmethod. We can call this method directly from the class but there is no need to pass a specific parameter. 
+
+```python
+print(Item.is_integer(8.0))
+```
+About the *is_integer* method- Mainly, if we have a float with the decimal part equal to zero, this will return true because it means that is an integer. Otherwise, is the decimal part is not zero, it will return false. 
 
 ## Assign attributes to specific instances individually
 
@@ -356,4 +378,73 @@ Yes. Magic is magic!
 
 We can create these type of files in vscode and with an extension called Excel Viewer we can display the content in a table. 
 
-57
+To import a csv file we need to have a library that does exactly that and the name is... guess.. csv haha
+
+```python
+import csv
+```
+
+### With: A new keyword in Python
+
+We will interrupt for a moment the topic of the csv files to explain a little bit what the *with* keyword means.
+
+Well... How to begin? Do you remember that we have the words *try* and *finally*? Yes. Ok... so. Those are used to handle exceptions and keep doing sth at the end even if sth went wrong when trying to do sth. For example when we want to open a file and write sth and at the end close the file no matter what happens. There are different ways how we can approach this.
+
+First way, the one that could cause bugs:
+
+```python
+file = open('file_path', 'w')
+file.write('hello world !')
+file.close()
+```
+
+In this case, if an exception occurs when trying to write in the file, it would prevent us from closing the file. So... nop, that implementation is definitely not a good idea.
+
+Second attempt:
+
+```python
+file = open('file_path', 'w')
+try:
+    file.write('hello world !')
+finally: 
+    file.close()
+```
+
+Well, yes. This would prevent any bug but... Let's say we are a little bit lazy and we don't really want to write all those *try* and *finally* keywords. Yes! That's exactly when *with* comes into action
+
+Third time is the charm: 
+
+```python
+with open('file_path', 'w') as file:
+    file.write('hello world !')
+```
+
+More compact, avoid bugs. Yes, sometimes the simpler, the better. :)
+
+We close this parenthesis with that.
+
+
+## Creating many instances at once
+
+Well, this may be not new for other people but this is new for me. We can create many instances of a class in a loop. Let's say that we have all the info in a csv file, then we could do the following thing:
+
+```python
+@classmethod
+    def instantiate_from_csv(cls):
+        with open('items.csv', 'r') as f:
+            reader = csv.DictReader(f)
+            for item in reader:
+                Item(
+                    name = item.get("name"),
+                    price = float(item.get("price")),
+                    quantity = int(item.get("quantity"))
+                )
+```
+And yes! All of them would be created. If we have a list where we save them then we would be able to read them.
+
+```python
+Item.instantiate_from_csv()
+print(Item.all)
+```
+
+## Static Methods
