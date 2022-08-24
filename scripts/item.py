@@ -1,3 +1,6 @@
+import csv
+
+
 class Item:
     
     pay_rate = 0.8 # The pay rate after 20% discount
@@ -27,6 +30,25 @@ class Item:
     
     @classmethod
     def instantiate_from_csv(cls):
-        pass
-    
+        with open('items.csv', 'r') as f:
+            reader = csv.DictReader(f)
+            for item in reader:
+                Item(
+                    name = item.get("name"),
+                    price = float(item.get("price")),
+                    quantity = int(item.get("quantity"))
+                )
+
+    @staticmethod
+    def is_integer(num):
+        if isinstance(num, int):
+            return True
+        elif isinstance(num, float):
+            return num.is_integer()
+        return False
+                
+Item.instantiate_from_csv()
+print(Item.all)
+
+print(Item.is_integer(7.0))
     
