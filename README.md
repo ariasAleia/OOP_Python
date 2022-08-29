@@ -124,6 +124,17 @@ Item.class_method()
 
 ```
 
+## Private methods
+
+We can also have private methods, we do it by using double underscore just the way we do it with attributes.
+
+```python
+    def __print_name(self):
+        print(self.name)
+```
+
+In this case, the method *print_name* can only be accessed in the class not outside the class. An instance for example cannot have access to this method.
+
 ## Assign attributes to specific instances individually
 
 Important and interesting to know. We can keep adding attributes directly to the instant that we created:
@@ -491,6 +502,132 @@ class Phone(Item):
         self.broken_phones = broken_phones
 ```
 
-In this case, the attributes name, price and quantity will be processed in the constructor of the parent class *Item* and the new attribute *broken_phones* will be processed in the child class *Phone*
+In this case, the attributes name, price and quantity will be processed in the constructor of the parent class *Item*, (will be sent so zu sagen) and the new attribute *broken_phones* will be processed in the child class *Phone*
 
-1:34
+## Getters and setters
+
+Ok... Til now we have set the values of the attributes directly in the constructor and we have called the attributes directly using ., for example: *item1.name* but... this is not that good because that means that our attributes are public.
+
+Encapsulation. Yes! One of the four OOP Principles: 
+
+* Abstraction: We don't really need to do how sth is done. We just need to know which function to call and that's it. Hide unnecessary information. Like wrapper functions, for instance. 
+
+* Encapsulation: Let's respect our private circle. Not everybody can access our attributes easily. They are private (most of the time). If sb wants to have access they should do it by using getters and setters.
+
+* Inheritance: Our parents already know how to do sth. Avoid taking the long path and repeating code, just inherit the methods and attributes that we need and done. (However! Nowadays is better, sometimes, to use composition over inheritance)
+
+* Polymorphism: That's like... Have your own style. Your own personality. Yes, we all know how to greet but I say hi in a different way to yours. The method is called the same but we all do it in a different way and that's fine.
+
+
+Ok, ok, ok... Interesting. But, coming back to just one principle: Encapsulation. We want our attributes to be private and if sb wants to change them or get their values, they should use the setters or getters. How to do it? Das ist ganz einfach. We do it by using the decorator @property
+
+### Getters and setters with @property and @attributename.setter
+
+The decorator @property allows us to have read-only attributes. 
+
+#### Private attributes
+
+If we want an attribute of a class to be private we have to add __ double underscore before it. For example:
+
+```python
+class Item:
+    
+    pay_rate = 0.8 # The pay rate after 20% discount
+    all = []
+    
+    def __init__(self, name: str, price: float, quantity: int = 0):
+        # Validate received arguments
+        assert price >= 0, f"Price {price} must be equal or greater than zero"
+        assert quantity >= 0, f"Quantity {quantity} must be equal or greater than zero"
+
+        # Assign attributes to self object
+        self.__name = name
+        self.price = price
+        self.quantity = quantity
+        
+```
+
+In this case, the attribute *name* is now private but to have access to it we have to use the decorator @property:
+
+```python
+    @property
+    def name(self):
+        return self.__name
+```
+
+However, that makes it a read-only attribute, if we want to set the attribute *name* to another value we have to use another decorator.
+
+If we want to be able to change the value of *name*, we do it like this:
+
+```python
+    @name.setter
+    def name(self, new_name):
+        self.__name = new_name
+```
+
+And the good thing is that when calling the getter and setter we do it directly without using the double underscore:
+
+```python
+phone1 = Item("Cel1", 34.5, 7)
+
+#Getting an attribute
+print(phone1.name)
+
+#Setting an attribute
+phone1.name = "new_cel1"
+print(phone1.name)
+```
+
+Output:
+```shell
+Cel1
+new_cel1
+```
+
+Ok, but why do we want to do all those things? Well, because when we set or get an attribute we don't do it directly anymore but through the call of a function and that means that we could add whatever we want in those getter and setter functions. For example:
+
+```python
+        
+    @property
+    def name(self):
+        print("You get the attribute through a function thanks to @property")
+        return self.__name
+            
+    @name.setter
+    def name(self, new_name):
+        print("You set the attribute with .setter")
+        self.__name = new_name
+```
+
+Output:
+
+```shell
+You get the attribute through a function thanks to @property
+Cel1
+You set the attribute with .setter
+You get the attribute through a function thanks to @property
+new_cel1
+```
+
+And yes, we are only printing sth and seems not to be that useful but hey! We could add conditionals to the setter for example to kinda control the values that our attribute can have. 
+
+For example:
+
+```python
+@name.setter
+    def name(self, new_name):
+        if len(new_name)>10:
+            raise Exception("The new name is too long. We can't set it")        
+        else:
+            print("You set the attribute with .setter")
+            self.__name = new_name
+```
+
+To sum up, with @property we make an attribute a read-only-attribute (it works only as a getter). It works pretty well if we have a private attribute (double underscore before the attribute name). If we want to be able to set the value of the attribute, we can do it using another decorator: .setter. In that way, we can encapsulate the attributes of the class. :)
+
+## Decorators
+
+Ok... We are always using this @ for decorators but... what is exactly a decorator? 
+
+Decorators are functions that we can pre-execute before a function
+
