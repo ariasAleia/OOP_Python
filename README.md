@@ -32,38 +32,6 @@ Btw, the word *pass* is used when we haven't defined what is inside a function, 
 Those are basically functions that are inside a class. There are two different types of methods. Class methods and instance methods.
 
 
-### Instance methods
-
-Instance methods are those who are called directly from an instance. For these methods we must always pass as argument the object (whn we say object it means exactly the same as instance) itself. That is done by writing *self* in the function parameters when we define the function. 
-
-```python
-class Item:
-    def calculate_total_price(self):
-        pass
-```
-
-Hey! Remember it!!! All instance methods in a class must have as parameter the object itself! We do it by writing *self* in the method.
-
-### Class methods
-
-Those methods are called directly from the class. That means that we don't any instance to call these methods. And therefore that means that **for class methods we don't need to pass *self* as an argument**, mainly because we only do it when we need an instance of the class but here the method, since it's a class method, doesn't need any instance.
-
-To differentiate class methods from instance methods we have to add a decorator in the declaration of the function. 
-
-Decorators are a quick way to change the behavior of the functions. They are words that begin with @ and are added before the definition of the function.
-
-```python
-@classmethod
-    def instantiate_from_csv(cls):
-        pass
-```
-
-But wait... Do you see the same that I am seeing? Yep, we still have an argument in that method. It is indeed not *self* but there is still a word: *cls*. Well, basically that occurs because we need anyway to call the function from the class and therefore the first argument of the class method is class, in a short way *cls*. That means that: (Here comes sth important!)
-
-**No matter if it's a class or instance method. Methods of a class or of an instance in Python must always have an argument. It is *self* for instance methods or it is *cls* for class methods. But the important point is that we always receive at least an argument. But take care: That's different if we are dealing with static methods**
-
-Btw, I think that the words *self* and *cls* must not be exactly those ones but we already know that convention is sth that helps readability and yep, life is easier and better when people do it.
-
 ## Constructor
 
 Well, basically the function that is called when we make an instance of a class.
@@ -87,6 +55,40 @@ item2 = Item("Laptops", 45)
 print(f"Name: {item2.name} Price: {item2.price} Quantity: {item2.quantity}")
 ```
 
+### Instance methods
+
+Instance methods are those who are called directly from an instance. For these methods we must always pass as argument the object (whn we say object it means exactly the same as instance) itself. That is done by writing *self* in the function parameters when we define the function. 
+
+```python
+class Item:
+    def calculate_total_price(self):
+        pass
+```
+
+Hey! Remember it!!! All instance methods in a class must have as parameter the object itself! We do it by writing *self* in the method.
+
+### Class methods
+
+Those methods are called directly from the class. That means that we don't any instance to call these methods. And therefore that means that **for class methods we don't need to pass *self* as an argument**, mainly because we only do it when we need an instance of the class but here the method, since it's a class method, doesn't need any instance.
+
+Class methods are usually used to instantiate, forgive the redundancy, many instances from a file like a csv or a json, for instance. 
+
+To differentiate class methods from instance methods we have to add a decorator in the declaration of the function. 
+
+Decorators are a quick way to change the behavior of the functions. They are words that begin with @ and are added before the definition of the function.
+
+```python
+@classmethod
+    def instantiate_from_csv(cls):
+        pass
+```
+
+But wait... Do you see the same that I am seeing? Yep, we still have an argument in that method. It is indeed not *self* but there is still a word: *cls*. Well, basically that occurs because we need anyway to call the function from the class and therefore the first argument of the class method is class, in a short way *cls*. That means that: (Here comes sth important!)
+
+**No matter if it's a class or instance method. Methods of a class or of an instance in Python must always have an argument. It is *self* for instance methods or it is *cls* for class methods. But the important point is that we always receive at least an argument. But take care: That's different if we are dealing with static methods**
+
+Btw, I think that the words *self* and *cls* must not be exactly those ones but we already know that convention is sth that helps readability and yep, life is easier and better when people do it.
+
 ## Static methods
 
 This kind of methods do not need specific parameters. Neither cls or self. They are related to the class somehow and have a relevance to it but they cannot modify any attribute of the class.
@@ -108,6 +110,19 @@ That one is a static method. We can see it because of the decorator @staticmetho
 print(Item.is_integer(8.0))
 ```
 About the *is_integer* method- Mainly, if we have a float with the decimal part equal to zero, this will return true because it means that is an integer. Otherwise, is the decimal part is not zero, it will return false. 
+
+## Calling class and static methods
+
+Although it is possible to call a static or class method from an instance level, it is always recommended to do it from the class level
+
+```python
+item1 = Item()
+#Calling from the instance level is possible but not a good practice:
+item1.class_method()
+#It's better to call it from the class level:
+Item.class_method()
+
+```
 
 ## Assign attributes to specific instances individually
 
@@ -447,4 +462,3 @@ Item.instantiate_from_csv()
 print(Item.all)
 ```
 
-## Static Methods
