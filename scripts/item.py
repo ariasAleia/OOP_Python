@@ -26,7 +26,7 @@ class Item:
         self.price *= self.pay_rate
         
     def __repr__(self):
-        return f"Item('{self.name}', {self.price}, {self.quantity})"
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
     
     @classmethod
     def instantiate_from_csv(cls):
@@ -46,9 +46,9 @@ class Item:
         elif isinstance(num, float):
             return num.is_integer()
         return False
-                
-Item.instantiate_from_csv()
-print(Item.all)
+           
 
-print(Item.is_integer(7.0))
+      
+
+
     

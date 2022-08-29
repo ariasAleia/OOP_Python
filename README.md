@@ -462,3 +462,35 @@ Item.instantiate_from_csv()
 print(Item.all)
 ```
 
+## Inheritance
+
+Ok... We remember that of our OOP course at the university. Let's check a little bit of the syntax now.
+
+```python
+class Phone(Item):
+
+```
+
+That means that the class *Phone* inherits from the class *Item*. In this case, the class *Item* is called **Parent Class** and the *Phone* class is the **Child Class**
+
+## Keyword super
+
+In order to use the same constructor of the parent class, we use the word *super*.
+
+```python
+class Phone(Item):
+    def __init__(self, name: str, price: float, quantity: int = 0, broken_phones = 0):
+        super.__init__(
+            name, price, quantity
+        )    
+
+    # Validate received arguments
+        assert broken_phones >= 0, f"Broken phones {broken_phones} must be equal or greater than zero"
+        
+        # Assign attributes to self object
+        self.broken_phones = broken_phones
+```
+
+In this case, the attributes name, price and quantity will be processed in the constructor of the parent class *Item* and the new attribute *broken_phones* will be processed in the child class *Phone*
+
+1:34
