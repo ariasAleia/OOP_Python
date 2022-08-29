@@ -629,5 +629,15 @@ To sum up, with @property we make an attribute a read-only-attribute (it works o
 
 Ok... We are always using this @ for decorators but... what is exactly a decorator? 
 
-Decorators are functions that we can pre-execute before a function
+Decorators are functions that we can pre-execute before a function. They add functionality to an existing code.
 
+This is also called... chan chan chaaan **metaprogramming** because a part fo the program is modifying another part of the program at compile time!
+
+And it all works because in Python eeeeverything is an object. Functions, exceptions, variables, everything is an object. We just attach names to them but in depth they are all the same: Objects.
+
+More info here: [Decorators](https://www.programiz.com/python-programming/decorator)
+
+
+And that's it guys! We are done with this step. But stay tunned because sth interesting is coming! 
+
+Algo... con ritmo: Algorithms :P
