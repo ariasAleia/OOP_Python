@@ -12,12 +12,25 @@ class Item:
         assert quantity >= 0, f"Quantity {quantity} must be equal or greater than zero"
 
         # Assign attributes to self object
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         
         # Actions to execute 
         Item.all.append(self)
+        
+    @property
+    def name(self):
+        print("You get the attribute through a function thanks to @property")
+        return self.__name
+            
+    @name.setter
+    def name(self, new_name):
+        if len(new_name)>10:
+            raise Exception("The new name is too long. We can't set it")        
+        else:
+            print("You set the attribute with .setter")
+            self.__name = new_name
         
     def calculate_total_price(self)->float:
         return self.price * self.quantity
