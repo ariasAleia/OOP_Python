@@ -1,4 +1,6 @@
-from phone import Phone
+from item import Item
 
-phone1 = Phone("Cel1", 34.5, 7, 1)
-print(Phone.all)
+phone1 = Item("Cel1", 34.5, 7)
+print(phone1.name)
+phone1.name = "nghjgkjew_cel1"
+print(phone1.name)
