@@ -640,4 +640,5 @@ More info here: [Decorators](https://www.programiz.com/python-programming/decora
 
 And that's it guys! We are done with this step. But stay tunned because sth interesting is coming! 
 
-Algo... con ritmo: Algorithms :P
+Algo... con ritmo: [Algorithms :P](https://github.com/ariasAleia/Intro-to-DS-and-Algorithms)
+
